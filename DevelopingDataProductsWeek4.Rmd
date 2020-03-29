@@ -1,0 +1,58 @@
+---
+title: "Developing Data Products Week4"
+author: "Shailesh Parab"
+date: "29/03/2020"
+output: ioslides_presentation
+widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## About the Developing Data Products Assignment
+
+This project is created as a part of Developing Data Products Week 4 assignment.
+
+Highlights
+
+1. Project contains Shiny Application for predicting hight of next gen based on parents hight
+
+2. Project uses many forms of inputs
+
+3. Project uses interactive chart for showing output.
+
+4. Project conains Server.R and UI.R files
+
+## How to use the application
+Data set used for project : Galton Family
+
+Use the slider for increasing/decreasing hight in CM for Father and Mother
+
+Selet the child number from between 1 to 5
+
+Select gender of child
+
+Graph is auto populated based on the data selection
+
+## Galton Families Dataset
+
+Glimps of GaltonFamilies dataset. 
+
+```{r summary, warning = FALSE}
+library(HistData)
+data(GaltonFamilies)
+summary(GaltonFamilies)
+```
+
+## Plot
+Below is the chart displaying data used in project.
+
+```{r plot}
+library(HistData)
+data(GaltonFamilies)
+intMidP <- GaltonFamilies$midparentHeight*2.54
+intChH <- GaltonFamilies$childHeight*2.54
+plot(jitter(intChH) ~ intMidP,xlab="Average Height of the Parents (in cm)",ylab="Height of the Child (in cm)",main="Scatterplot of Galton Family Data",pch=19,frame.plot=FALSE,col=ifelse(GaltonFamilies$gender=="female", "red", "blue"))
+legend(65,80,pch=c(19,19),col=c("pink","light blue"),c("female", "male"),bty="o",cex=.5)
+```
